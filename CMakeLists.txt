@@ -1,0 +1,23 @@
+idf_component_register(
+    SRCS
+        "src/newt.c"
+        "src/newt_auth.c"
+        "src/newt_ws.c"
+        "src/newt_proto.c"
+        "src/newt_wg.c"
+        "src/newt_ping.c"
+    INCLUDE_DIRS
+        "include"
+    REQUIRES
+        esp_common
+        esp_event
+        esp_netif
+    PRIV_REQUIRES
+        esp_http_client
+        esp_websocket_client
+        esp_wireguard
+        mbedtls
+        cjson
+        nvs_flash
+        lwip
+)

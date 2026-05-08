@@ -1,0 +1,31 @@
+set(NEWT_ENV_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../.env")
+set(NEWT_SECRETS_HEADER "${CMAKE_CURRENT_BINARY_DIR}/newt_secrets.h")
+set(NEWT_SECRETS_CONTENT "#pragma once\n\n")
+if(EXISTS "${NEWT_ENV_FILE}")
+    file(STRINGS "${NEWT_ENV_FILE}" NEWT_ENV_LINES ENCODING UTF-8)
+    foreach(LINE ${NEWT_ENV_LINES})
+        string(STRIP "${LINE}" LINE)
+        if(LINE MATCHES "^[A-Za-z_][A-Za-z0-9_]*=.*$")
+            string(REGEX REPLACE "^([A-Za-z_][A-Za-z0-9_]*)=(.*)$" "\\1;\\2" KV "${LINE}")
+            list(GET KV 0 KEY)
+            list(GET KV 1 VAL)
+            string(STRIP "${VAL}" VAL)
+            if(VAL MATCHES "^\"(.*)\"$")
+                set(VAL "${CMAKE_MATCH_1}")
+            elseif(VAL MATCHES "^'(.*)'$")
+                set(VAL "${CMAKE_MATCH_1}")
+            endif()
+            string(REPLACE "\\" "\\\\" VAL "${VAL}")
+            string(REPLACE "\"" "\\\"" VAL "${VAL}")
+            string(APPEND NEWT_SECRETS_CONTENT "#define NEWT_${KEY} \"${VAL}\"\n")
+        endif()
+    endforeach()
+endif()
+file(WRITE "${NEWT_SECRETS_HEADER}" "${NEWT_SECRETS_CONTENT}")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${NEWT_ENV_FILE}")
+
+idf_component_register(
+    SRCS "main.c"
+    INCLUDE_DIRS "." "${CMAKE_CURRENT_BINARY_DIR}"
+    REQUIRES newt-esp32
+)

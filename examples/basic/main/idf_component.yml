@@ -1,0 +1,5 @@
+dependencies:
+  idf: ">=5.1"
+  robby/newt-esp32:
+    version: "*"
+    override_path: "../../../"

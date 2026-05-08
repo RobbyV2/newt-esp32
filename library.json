@@ -1,0 +1,45 @@
+{
+  "name": "newt-esp32",
+  "version": "0.1.0",
+  "description": "Newt-style WireGuard endpoint client for ESP32, transport-agnostic, register an ESP32 as a Pangolin site over WireGuard.",
+  "keywords": "wireguard, vpn, networking, newt, fosrl, pangolin, esp32",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robby-blue/newt-esp32.git"
+  },
+  "authors": [
+    {
+      "name": "Robby",
+      "url": "https://robby.blue",
+      "maintainer": true
+    }
+  ],
+  "frameworks": "espidf",
+  "platforms": "espressif32",
+  "headers": "newt.h",
+  "dependencies": [
+    { "owner": "espressif", "name": "cjson", "version": "^1.7.19" },
+    { "owner": "espressif", "name": "esp_websocket_client", "version": "^1.7.0" }
+  ],
+  "export": {
+    "exclude": [
+      "examples",
+      "refs",
+      "temp",
+      ".pio",
+      ".github",
+      ".claude",
+      "scripts",
+      ".env",
+      ".env.example",
+      ".gitignore",
+      "CLAUDE.md",
+      "idf_component.yml"
+    ]
+  },
+  "build": {
+    "srcDir": "src",
+    "includeDir": "include"
+  }
+}

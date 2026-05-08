@@ -1,0 +1,39 @@
+# Project
+refs/
+.venv/
+.pio/
+
+# AI
+**CLAUDE**
+.claude/
+.remember/
+
+# Bootstrap additions
+.env
+build/
+
+# Example consumer (examples/basic)
+examples/basic/.env
+examples/basic/.pio/
+examples/basic/build/
+examples/basic/managed_components/
+examples/basic/dependencies.lock
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Phase 1 research notes
+refs/_notes/
+
+# Generated sdkconfig dumps (sources are sdkconfig.defaults*)
+examples/basic/sdkconfig.esp32
+examples/basic/sdkconfig.esp32s2
+examples/basic/sdkconfig.esp32s3
+examples/basic/sdkconfig.esp32c3
+examples/basic/sdkconfig.esp32c6
+
+# Ephemeral
+temp/
